@@ -18,3 +18,8 @@
 .chart-datalist .disabled {
   color: color(var(--fontColor) a(50%))
 }
+
+.chart svg text {
+  fill: black !important;
+  font-weight: 400;
+}
