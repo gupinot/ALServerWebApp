@@ -1,0 +1,11 @@
+.DS_Store
+npm-debug.log
+node_modules
+dist
+project
+_translations
+*.iml
+.idea
+*.ipr
+*.iws
+public/data

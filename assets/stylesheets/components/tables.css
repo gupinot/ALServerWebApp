@@ -1,0 +1,49 @@
+.reactable-page-button {
+  margin: 1em;
+  padding: 3px;
+}
+
+.reactable-current-page {
+  margin: 1em;
+  padding: 3px;
+  border: 1px solid;
+}
+
+.reactable-next-page, .reactable-prev-page {
+  padding: 3px;
+  margin: 1em;
+}
+
+table thead th {
+  position: relative;
+}
+
+.reactable-header-sortable:after, .reactable-header-sort-asc:after, .reactable-header-sort-desc:after {
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  display: block;
+  font-family: FontAwesome;
+}
+
+.reactable-header-sortable:after {
+  content: "\f0dc";
+  font-size: 0.8em;
+  padding-top: 0.12em;
+}
+
+.reactable-header-sort-asc:after {
+  content: "\f0de";
+}
+
+.reactable-header-sort-desc:after {
+  content: "\f0dd";
+}
+
+.pure-table.table-condensed td {
+  padding: 0.1em 0.3em;
+}
+
+.pure-table.table-condensed {
+  font-size: 90%;
+}

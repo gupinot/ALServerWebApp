@@ -1,0 +1,27 @@
+:root {
+  /* layout properties */
+  --sidebarWidth: 200px;
+
+  /* brading and coloring */
+  /* main background color */
+  --bodyBkgColor: #ddd;
+  --bkgColor: #fff;
+  --panelBkgColor: #fafafa;
+  --heroBkgColor: lightblue;
+  --heroColor: #000;
+
+  /* main font style and color */
+  --fontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --fontColor: #333;
+  --titleColor: #555;
+  /* menu and sidebar backgrounds and font color */
+  --menuColor: #222;
+  --menuBkgColor: #fafafa;
+  /* brand logo */
+  --brandLogo: url('http://placehold.it/200x75');
+  /* primary color for charts and submit buttons */
+  --primaryColor: lightblue;
+  --secondColor: darkgoldenrod;
+  --thirdColor: mediumseagreen;
+  --fourthColor: blueviolet;
+}

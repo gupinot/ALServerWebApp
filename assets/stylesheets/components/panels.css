@@ -1,0 +1,104 @@
+.panel {
+  background-color: var(--panelBkgColor);
+  border-radius: 3px;
+  margin: 1em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.5em;
+}
+
+.panel-header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 130%;
+}
+
+.panel-instructions {
+  margin: 0.5em 0;
+  text-align: left;
+}
+
+.panel-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.panel-footer {
+}
+
+.login-panel {
+  background-color: var(--bkgColor);
+  min-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid var(--menuColor);
+  border-radius: 5px;
+  box-shadow: 3px var(--menuColor);
+  text-align: center;
+}
+
+.login-panel > .panel-header {
+  background: var(--brandLogo) center no-repeat transparent;
+  background-size: contain;
+  min-height: 150px;
+}
+
+.tops-panel > .panel-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.description {
+  width: 100%;
+  padding: 1em 0;
+}
+
+.hero {
+  display: flex;
+  align-items: stretch;
+}
+
+.hero > .linkbox {
+  flex-basis: 25%;
+  margin-right: auto;
+}
+
+.counterbox {
+  flex: 1;
+  max-width: 10em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--heroBkgColor);
+  color: var(--heroColor);
+  margin: 0.1em;
+}
+
+.counterbox > h1 {
+  margin-bottom: 0;
+}
+.counterbox > .title {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.linkbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid var(--heroBkgColor);
+  margin: 0.1em;
+  padding: 0.5em;
+}
+
+.linkbox > h3 {
+  margin: 0;
+}
+
+.linkbox > .link {
+  display: block;
+  flex: 1;
+}

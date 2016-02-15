@@ -1,0 +1,33 @@
+.calmap {
+  text-align: center;
+}
+
+.calmap-main {
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.calmap-legend {
+  display: flex;
+  list-style: none;
+  flex-direction: row;
+  flex: 1 0 0%;
+  justify-content: center;
+}
+
+.calmap-legend > li {
+  position: relative;
+  margin-right: 2em;
+}
+
+.calmap-legend > li > span {
+  color: var(--fontColor);
+}
+
+.calmap-legend > li:before {
+  position: absolute;
+  left: -1em;
+  font-family: "FontAwesome";
+  content: "\f0c8";
+}

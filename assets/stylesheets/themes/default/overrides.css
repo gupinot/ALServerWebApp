@@ -1,0 +1,12 @@
+:root {
+  --fontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --bodyBkgColor: #ddd;
+  --bkgColor: #fff;
+  --fontColor: #333;
+  --titleColor: #111;
+  --menuColor: #111;
+  --menuBkgColor: #fff;
+  --titlebarBkgColor: #fff;
+  --brandLogo: url('/public/images/ge.png');
+  --sidebarWidth: 200px;
+}

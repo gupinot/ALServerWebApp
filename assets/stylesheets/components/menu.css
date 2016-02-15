@@ -1,0 +1,28 @@
+.menu-content {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--menuBkgColor);
+  color: var(--menuColor);
+  height: 70px;
+  align-items: center;
+}
+
+.pure-menu-horizontal.menu-right {
+  margin-left: auto;
+}
+
+.pure-menu-horizontal {
+  width: auto !important;
+}
+
+#topmenu > .menu-content {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.app-branding {
+  background: var(--brandLogo) center no-repeat;
+  background-size: contain;
+  height: 70px;
+  min-width: 200px;
+}

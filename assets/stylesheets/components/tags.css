@@ -1,0 +1,47 @@
+.tag {
+  display: flex;
+  font-weight: 600;
+  margin: 5px;
+}
+
+.tag .tag-value {
+  text-overflow: ellipsis;
+  word-wrap: normal;
+  overflow: hidden;
+}
+
+.tag .tag-caption {
+  width: 4em;
+  margin-right: 5px;
+  padding: 0 5px;
+  text-align: center;
+}
+
+.tag.imsi .tag-caption {
+  background-color: var(--primaryColor);
+}
+
+.tag.msisdn .tag-caption {
+  background-color: var(--primaryColor);
+}
+
+.tag.iccid .tag-caption {
+  background-color: var(--primaryColor);
+}
+
+.tag.label .tag-caption {
+  background-color: var(--secondColor);
+}
+
+.tag.gc .tag-caption {
+  background-color: var(--thirdColor);
+}
+
+.tag.isp .tag-caption {
+  background-color: var(--fourthColor);
+}
+
+.tag.global .tag-caption {
+  background-color: black;
+  color: white;
+}
