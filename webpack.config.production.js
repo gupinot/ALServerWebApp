@@ -20,7 +20,7 @@ module.exports = {
   output: {
     filename: '[name].min.js',
     path: path.join(__dirname, 'dist'),
-    publicPath: ''
+    publicPath: '/webapp/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -41,6 +41,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Alstom ServerUsage',
       filename: 'index.html',
+      publicPath: '/webapp',
       template: 'index.template.html',
       favicon: path.join(__dirname, 'assets/images/favicon.ico')
     })

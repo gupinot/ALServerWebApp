@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="{%=o.htmlWebpackPlugin.files.favicon%}">
     {% } %}
 
-    <script src="/public/pace/pace.min.js"></script>
+    <script src="{%=o.htmlWebpackPlugin.options.publicPath%}/public/pace/pace.min.js"></script>
     <script>
       var method, methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
         length = methods.length,
@@ -19,7 +19,7 @@
         (!console[method]) && (console[method] = function() {});
       }
     </script>
-    <link rel="stylesheet" href="/public/pace/pace.flash.css">
+    <link rel="stylesheet" href="{%=o.htmlWebpackPlugin.options.publicPath%}/public/pace/pace.flash.css">
     {% for (var css in o.htmlWebpackPlugin.files.css) { %}
     <link href="{%=o.htmlWebpackPlugin.files.css[css] %}" rel="stylesheet">
     {% } %}
