@@ -1,1 +1,1 @@
-export const BASE_API = '/data'
+export const BASE_API = '/gezeppelin/data'
