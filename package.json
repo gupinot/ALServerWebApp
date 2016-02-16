@@ -8,8 +8,10 @@
   "license": "copyright GE Alstom 2016",
   "scripts": {
     "build": "npm run clean && webpack",
-    "clean": "rimraf dist",
-    "dist": "npm run clean && NODE_ENV=production webpack --config webpack.config.production.js",
+    "clean": "rm -rf dist",
+    "deploy": "aws s3 sync dist s3://gezeppelin/webapp ",
+    "package": "cp -rf public dist && rm -rf dist/public/data",
+    "dist": "npm run clean && NODE_ENV=production webpack --config webpack.config.production.js && npm run package",
     "start": "npm run build && node server.js",
     "start:devtools": "npm run build && DEVTOOLS=true node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
