@@ -41,7 +41,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Alstom ServerUsage',
       filename: 'index.html',
-      publicPath: '/gezeppelin/webapp',
+      publicPath: '/gezeppelin/webapp/',
       template: 'index.template.html',
       favicon: path.join(__dirname, 'assets/images/favicon.ico')
     })

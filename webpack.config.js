@@ -17,7 +17,7 @@ module.exports = {
   output: {
     filename: 'app.js',
     path: path.join(__dirname, 'dist'),
-    publicPath: ''
+    publicPath: '/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -32,7 +32,7 @@ module.exports = {
       title: 'Alstom ServerUsage',
       filename: 'index.html',
       template: 'index.template.html',
-      publicPath: '',
+      publicPath: '/',
       favicon: path.join(__dirname, 'assets', 'images', 'favicon.ico')
     })
   ],
