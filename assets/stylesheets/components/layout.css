@@ -63,13 +63,13 @@
 
 @media (--viewport-medium) {
   .content { width: 980px; }
-  .titlebar-content { width: 980px; }
+  .titlebar-content { max-width: 980px; }
   .menu-content { width: 980px; }
 }
 
 @media (--viewport-large) {
   .content { width: 1280px; }
-  .titlebar-content { width: 1280px; }
+  .titlebar-content { max-width: 1280px; }
   .menu-content { width: 1280px; }
 }
 
