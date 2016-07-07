@@ -1,1 +1,1 @@
-export const BASE_API = 'http://localhost:3001/public/data'
+export const BASE_API = 'http://localhost:3001/api'

@@ -3,6 +3,7 @@ var express = require('express');
 var webpack = require('webpack');
 var fs = require('fs');
 var config = require('./webpack.config');
+var appServer = require('./server/index');
 
 var app = express();
 var compiler = webpack(config);
@@ -14,6 +15,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 app.use('/public', express.static(__dirname + '/public'));
+
+app.use('/api',appServer);
 
 app.get('*', function (req, res) {
   console.log('Trap: ' + req.url);

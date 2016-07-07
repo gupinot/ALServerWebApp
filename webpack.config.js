@@ -9,7 +9,7 @@ var roots = [
 ];
 
 module.exports = {
-  devtool: 'cheap-source-map',
+  devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client',
     './lib/index'
