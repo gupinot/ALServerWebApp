@@ -8,16 +8,25 @@ var client = new es.Client({
 
 const router = express.Router();
 
+function parseFilters(filters,attrs) {
+    const filterObj = (typeof filters == 'string' ? JSON.parse(filters) : filters ) || {}
+    if (Array.isArray(attrs)) {
+        attrs.forEach(attr => delete filterObj[attr])
+    }
+    return Object.keys(filterObj).map(key => {
+        if (Array.isArray(filterObj[key])) {
+            return {terms: { [key]: filterObj[key]}}
+        } else if (typeof filterObj[key] == 'string') {
+            return {term: { [key]: filterObj[key]}}
+        } else {
+            return {range: { [key]: filterObj[key]}}
+        }
+    });
+}
+
 router.get('/servers', (req,res) => {
     const limit = req.query.limit || 100;
-    const filters = JSON.parse(req.query.filters || "{}")
-    const filterParam = Object.keys(filters).map(key => {
-        if (Array.isArray(filters[key])) {
-            return {terms: { [key]: filters[key]}}
-        } else {
-            return filter = {range: { [key]: filters[key]}}
-        }
-    })
+    const filterParam = parseFilters(req.query.filters);
     const q = req.query.q || ""
     const from = req.query.from || 0;
     const params = {
@@ -29,14 +38,14 @@ router.get('/servers', (req,res) => {
     let filterInsertPoint;
 
     if (q !== "") {
-       params.body.query = {
-           filtered:{
-               query:{
-                   query_string: {
-                       query: q
-                   }
-               }
-           }
+        params.body.query = {
+            filtered:{
+                query:{
+                    query_string: {
+                        query: q
+                    }
+                }
+            }
         }
         filterInsertPoint = params.body.query.filtered
     } else if (filterParam.length > 0) {
@@ -92,56 +101,60 @@ router.get('/servers/:name', (req,res) => {
     });
 });
 
-
-router.get('/servers/by/:attr', (req,res) => {
+router.get('/servers/by/:attrs', (req,res) => {
     const limit = 0;
-    const attr = req.param('attr');
-    const filters = JSON.parse(req.query.filters || "{}")
-    delete filters[attr];
-    const filterParam = Object.keys(filters).map(key => {
-        if (Array.isArray(filters[key])) {
-            return {terms: { [key]: filters[key]}}
-        } else {
-            return filter = {range: { [key]: filters[key]}}
-        }
-    })
-    const termAggs =  {
-        terms: {
-            field: attr
-        }
-    };
+    const attrs = req.params.attrs.split(',');
+    const filters = JSON.parse(req.query.filters) || {};
+    const filterParam = parseFilters(filters, attrs);
+
+    const aggs =  attrs.map(attr=>({aggs:{[attr]:{terms:{field:attr}}}})).reverse()
+        .reduce((acc,query)=>{
+            const key = Object.keys(query.aggs)[0];
+            query.aggs[key] = Object.assign({},query.aggs[key],acc);
+            return query;
+        },{});
     const params = {
         index: 'merged',
         size: limit,
         body: {}
     };
     if (Object.keys(filters).length > 0) {
+        const filterQuery = {
+            filter: {
+                bool: {
+                    filter: filterParam
+                }
+            }
+        };
         params.body = {
             aggs: {
-                [attr + '_filtered']: {
-                    filter: {
-                        bool: {
-                            filter: filterParam
-                        }
-                    },
-                    aggs: {
-                        [attr]: termAggs
-                    }
-                }
+                filtered: Object.assign({},filterQuery,aggs)
             }
         }
     } else {
-        params.body = {
-            aggs: {
-                [attr]: termAggs
-            }
-        }
+        params.body = aggs
     };
     client.search(params, (err,data) => {
         try {
-            const body = data.aggregations.hasOwnProperty(attr) ? data.aggregations[attr] : data.aggregations[attr+'_filtered'][attr]
             res.set('Cache-Control', 'private, max-age=600');
-            res.json(body.buckets.map(d=>({key: d.key, value: d.doc_count})));
+
+            const root = data.aggregations.hasOwnProperty('filtered') ? data.aggregations.filtered : data.aggregations;
+            const finalAttr = attrs[attrs.length-1];
+
+            for (let i=0;i < attrs.length-1; i++) {
+                const attr = attrs[i];
+                const nextAttr = attrs[i+1];
+
+                root[nextAttr]= {buckets:
+                    [].concat(...root[attr].buckets.map(obj=>
+                        obj[nextAttr].buckets.map(nextObj=>Object.assign({},nextObj,{[attr]:obj.key})))
+                    )
+                }
+            }
+            res.json(root[finalAttr].buckets.map(d=>({
+                key: attrs.length <= 1 ? d.key : attrs.map(attr=>d.hasOwnProperty(attr)?d[attr]:d.key),
+                value: d.doc_count
+            })));
         } catch (e) {
             res.status(500).end()
         }
@@ -218,15 +231,8 @@ router.get('/sites/:name', (req,res) => {
 router.get('/sites/by/:attr', (req,res) => {
     const limit = 0;
     const attr = req.param('attr');
-    const filters = JSON.parse(req.query.filters || "{}")
-    delete filters[attr];
-    const filterParam = Object.keys(filters).map(key => {
-        if (Array.isArray(filters[key])) {
-            return {terms: { [key]: filters[key]}}
-        } else {
-            return filter = {range: { [key]: filters[key]}}
-        }
-    })
+    const filters = parseFilters(req.query.filters,[attr])
+
     const termAggs =  {
         terms: {
             field: attr
