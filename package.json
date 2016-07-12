@@ -22,7 +22,6 @@
     "d3": "^3.5.13",
     "dc": "^2.0.0-beta.25",
     "dc-addons": "^0.13.1",
-    "elasticsearch": "^11.0.1",
     "font-awesome": "^4.4.0",
     "history": "^1.12.5",
     "isomorphic-fetch": "^2.2.0",

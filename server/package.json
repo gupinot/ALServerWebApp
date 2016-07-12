@@ -1,0 +1,20 @@
+{
+  "name": "alstom-serverusage-server",
+  "version": "0.7.0",
+  "private": "true",
+  "description": "Server usage report application node.js",
+  "homepage": "https://serverusage.gadatalab.com",
+  "author": "Raphaël Luta <raphael.luta@aptiwan.com>",
+  "license": "copyright GE Alstom 2016",
+  "scripts": {
+    "build": "npm run clean && mkdir -p build && cp -rf ../dist build/web && cp *.js *.json build && cp -rf lib scripts build/ && npm run package",
+    "clean": "rm -rf build $npm_package_name-$npm_package_version $npm_package_name-$npm_package_version.tgz *.log",
+    "package": "ln -s build $npm_package_name-$npm_package_version && tar zcvfL $npm_package_name-$npm_package_version.tgz $npm_package_name-$npm_package_version/",
+    "start": "npm run build && node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "elasticsearch": "^11.0.1",
+    "express": "^4.13.3"
+  }
+}
