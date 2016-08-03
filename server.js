@@ -3,7 +3,7 @@ var express = require('express');
 var webpack = require('webpack');
 var fs = require('fs');
 var config = require('./webpack.config');
-var appServer = require('./server/index');
+var appServer = require('./server/lib/api');
 
 var app = express();
 var compiler = webpack(config);
