@@ -9,3 +9,4 @@ _translations
 *.ipr
 *.iws
 public/data
+server/alstom-serverusage-server-*
